@@ -5,17 +5,17 @@ import App from "./app";
 
 // Mock of Header component
 vi.mock("./Header", () => ({
-  default: () => <div>Header</div>,
+	default: () => <div>Header</div>,
 }));
 
 describe("<App />", () => {
-  function setup() {
-    render(<App />);
-  }
+	function setup() {
+		render(<App />);
+	}
 
-  it("should render without error", () => {
-    setup();
+	it("should render without error", () => {
+		setup();
 
-    expect(screen.getByText(/header/i)).toBeInTheDocument();
-  });
+		expect(screen.getByText(/header/i)).toBeInTheDocument();
+	});
 });

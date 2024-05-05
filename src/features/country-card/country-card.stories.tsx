@@ -1,17 +1,17 @@
 import type { Story, StoryDefault } from "@ladle/react";
 import CountryCard from "./country-card";
-import React from "react";
+import type React from "react";
 
 export default {
-  title: "Country Card",
+	title: "Country Card",
 } satisfies StoryDefault;
 
 export const DefaultCountryCard: Story<
-  React.ComponentProps<typeof CountryCard>
+	React.ComponentProps<typeof CountryCard>
 > = CountryCard;
 
 DefaultCountryCard.storyName = "Country Card";
 
 DefaultCountryCard.args = {
-  countryName: "BY",
+	countryName: "BY",
 };

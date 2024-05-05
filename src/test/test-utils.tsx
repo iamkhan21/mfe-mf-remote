@@ -1,17 +1,17 @@
-import React from "react";
+import type React from "react";
 import { cleanup, render } from "@testing-library/react";
 import { afterEach } from "vitest";
 
 afterEach(() => {
-  cleanup();
+	cleanup();
 });
 
 function customRender(ui: React.ReactElement, options = {}) {
-  return render(ui, {
-    // wrap provider(s) here if needed
-    wrapper: ({ children }) => children,
-    ...options,
-  });
+	return render(ui, {
+		// wrap provider(s) here if needed
+		wrapper: ({ children }) => children,
+		...options,
+	});
 }
 
 export * from "@testing-library/react";

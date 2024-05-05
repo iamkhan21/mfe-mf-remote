@@ -10,7 +10,7 @@ if (!element) throw new Error("No root element found");
 const root = ReactDOM.createRoot(element);
 
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>,
 );
