@@ -1,0 +1,53 @@
+{
+  "name": "rem",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
+    "doctor": "cross-env RSDOCTOR=true nr build",
+    "update:deps": "nlx taze -wlI",
+    "format": "nlx @biomejs/biome format --write ./src",
+    "lint": "nlx @biomejs/biome lint --apply ./src",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "ladle:start": "nlx ladle serve -p 5174",
+    "ladle:build": "nlx ladle build",
+    "ladle:preview": "nlx ladle preview"
+  },
+  "dependencies": {
+    "@radix-ui/themes": "3.0.3",
+    "@tanstack/react-query": "5.34.2",
+    "func-compose": "0.0.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "rxdb": "15.19.0",
+    "rxjs": "7.8.1",
+    "wretch": "2.8.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.2",
+    "@ladle/react": "4.0.3",
+    "@module-federation/enhanced": "0.1.11",
+    "@rsbuild/core": "0.6.9",
+    "@rsbuild/plugin-css-minimizer": "0.6.9",
+    "@rsbuild/plugin-react": "0.6.9",
+    "@rsdoctor/rspack-plugin": "0.2.2",
+    "@tanstack/react-query-devtools": "5.34.2",
+    "@testing-library/jest-dom": "6.4.5",
+    "@testing-library/react": "15.0.6",
+    "@testing-library/user-event": "14.5.2",
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.0",
+    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/ui": "1.6.0",
+    "cross-env": "7.0.3",
+    "cssnano-preset-advanced": "7.0.1",
+    "jsdom": "24.0.0",
+    "prettier": "3.2.5",
+    "typescript": "5.4.5",
+    "vitest": "1.6.0"
+  }
+}
