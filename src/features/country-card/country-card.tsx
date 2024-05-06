@@ -30,7 +30,7 @@ const CountryCard: React.FC<CountryCardProps> = ({ countryName }) => {
 			<Separator my="2" size="4" />
 			<Grid columns="auto 1fr" gapY="2" gapX="4">
 				{/* Official name */}
-				<Text size="4">Official name:</Text>
+				<Text size="4">Official:</Text>
 				<Skeleton loading={isLoading}>
 					<Heading size="4">
 						{data?.name.official} ({data?.cca2})
