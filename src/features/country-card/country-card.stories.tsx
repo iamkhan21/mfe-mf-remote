@@ -13,5 +13,5 @@ export const DefaultCountryCard: Story<
 DefaultCountryCard.storyName = "Country Card";
 
 DefaultCountryCard.args = {
-	countryName: "BY",
+	countryIsoCode: "BY",
 };

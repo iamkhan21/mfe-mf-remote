@@ -23,5 +23,5 @@ export type CountryBase = {
 export type CountryFull = CountryBase & {
 	currencies: Record<string, CountryCurrency>;
 	capital: Array<string>;
-	languages: Array<Record<string, string>>;
+	languages: Record<string, string>;
 };
