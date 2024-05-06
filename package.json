@@ -1,5 +1,5 @@
 {
-  "name": "rem",
+  "name": "mfe-remote",
   "private": true,
   "version": "1.0.0",
   "scripts": {
@@ -15,7 +15,7 @@
     "test:coverage": "vitest run --coverage",
     "ladle:start": "nlx ladle serve -p 5174",
     "ladle:build": "nlx ladle build",
-    "ladle:preview": "nlx ladle preview"
+    "ladle:preview": "nlx ladle preview -p 5174"
   },
   "dependencies": {
     "@radix-ui/themes": "3.0.3",
