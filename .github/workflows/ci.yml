@@ -21,6 +21,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: install @antfu/ni
+        run: bun install -g @antfu/ni
+
       - name: install dependencies
         run: bun install
 
