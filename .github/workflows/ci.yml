@@ -25,9 +25,9 @@ jobs:
         run: bun install
 
       - name: lint
-        run: bun run lint
+        run: nr lint
 
         # Run tests if only linter passes
       - name: test with coverage
         if: success()
-        run: bun run test
+        run: nr test

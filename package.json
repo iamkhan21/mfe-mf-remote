@@ -30,6 +30,7 @@
     "wretch": "2.8.1"
   },
   "devDependencies": {
+    "@antfu/ni": "0.21.12",
     "@biomejs/biome": "1.7.3",
     "@ladle/react": "4.0.3",
     "@module-federation/enhanced": "0.1.12",
