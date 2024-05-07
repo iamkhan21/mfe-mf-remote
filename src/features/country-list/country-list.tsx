@@ -22,12 +22,15 @@ const CountryList: React.FC<CountryListProps> = (props) => {
 						<Table.ColumnHeaderCell>Official name</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>Common name</Table.ColumnHeaderCell>
 						<Table.ColumnHeaderCell>ISO code</Table.ColumnHeaderCell>
+						<Table.ColumnHeaderCell>Region</Table.ColumnHeaderCell>
 					</Table.Row>
 				</Table.Header>
 
 				<Table.Body>
 					{isLoading ? (
 						<>
+							<TableRowSkeleton />
+							<TableRowSkeleton />
 							<TableRowSkeleton />
 							<TableRowSkeleton />
 							<TableRowSkeleton />
@@ -41,6 +44,9 @@ const CountryList: React.FC<CountryListProps> = (props) => {
 								<Table.Cell>{country.name.official}</Table.Cell>
 								<Table.Cell>{country.name.common}</Table.Cell>
 								<Table.Cell>{country.cca2}</Table.Cell>
+								<Table.Cell>
+									{country.region} {country.subregion}
+								</Table.Cell>
 							</Table.Row>
 						))
 					)}
@@ -53,7 +59,7 @@ const CountryList: React.FC<CountryListProps> = (props) => {
 export default CountryList;
 
 const TableRowSkeleton = () => (
-	<Table.Row>
+	<Table.Row data-testid="row-skeleton">
 		<Table.Cell>
 			<Skeleton>Official country name</Skeleton>
 		</Table.Cell>
@@ -62,6 +68,9 @@ const TableRowSkeleton = () => (
 		</Table.Cell>
 		<Table.Cell>
 			<Skeleton>Country ISO code</Skeleton>
+		</Table.Cell>
+		<Table.Cell>
+			<Skeleton>Country Region</Skeleton>
 		</Table.Cell>
 	</Table.Row>
 );

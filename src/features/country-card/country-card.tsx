@@ -1,13 +1,16 @@
 import type React from "react";
 import {
 	Card,
+	Flex,
 	Grid,
 	Heading,
+	Link,
 	Separator,
 	Skeleton,
 	Text,
 } from "@radix-ui/themes";
 import { useCountry } from "../../entities/country/model";
+import { MAP_TYPE } from "../../entities/country/domain";
 
 type CountryCardProps = {
 	countryIsoCode: string;
@@ -59,6 +62,27 @@ const CountryCard: React.FC<CountryCardProps> = ({ countryIsoCode }) => {
 							.map(([currency, value]) => `${value.name} (${currency})`)
 							.join(", ")}
 					</Text>
+				</Skeleton>
+				{/* Region */}
+				<Text size="4">Region:</Text>
+				<Skeleton loading={isLoading} data-testid="region-skeleton">
+					<Text size="4" weight="bold">
+						{data?.region}, {data?.subregion}
+					</Text>
+				</Skeleton>
+				{/* Maps */}
+				<Text size="4">Maps:</Text>
+				<Skeleton loading={isLoading} data-testid="maps-skeleton">
+					<Flex gap="4">
+						{Object.entries(data?.maps || {}).map(([key, value]) => (
+							<Link href={value} key={key} target="_blank">
+								{
+									// @ts-ignore
+									MAP_TYPE[key]
+								}
+							</Link>
+						))}
+					</Flex>
 				</Skeleton>
 			</Grid>
 		</Card>

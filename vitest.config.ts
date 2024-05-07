@@ -7,9 +7,11 @@ export default defineConfig({
     setupFiles: "./src/test/setup.ts",
     coverage: {
       enabled: true,
+      include: ["src/**/*.{ts,tsx}"],
       exclude: [
-        "rsbuild.config.ts",
         "**/*.stories.tsx",
+        "src/bootstrap.tsx",
+        "src/**/index.{ts,tsx}",
         ...coverageConfigDefaults.exclude,
       ],
     },

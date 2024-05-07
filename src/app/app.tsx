@@ -1,6 +1,5 @@
 import { withProviders } from "./providers";
-import UserCard from "../features/user-card";
-import { Heading } from "@radix-ui/themes";
+import { Heading, Text } from "@radix-ui/themes";
 import React from "react";
 
 const App = () => {
@@ -10,7 +9,7 @@ const App = () => {
 				<Heading size="7">USPM</Heading>
 			</header>
 			<main className="app-container">
-				<UserCard />
+				<Text>Remote module for country data</Text>
 			</main>
 		</>
 	);

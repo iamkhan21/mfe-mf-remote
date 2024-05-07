@@ -1,0 +1,33 @@
+name: Lint and Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint_and_test:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: install dependencies
+        run: bun install
+
+      - name: lint
+        run: bun run lint
+
+        # Run tests if only linter passes
+      - name: test with coverage
+        if: success()
+        run: bun run test

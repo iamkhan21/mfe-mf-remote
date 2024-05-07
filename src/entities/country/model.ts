@@ -12,7 +12,7 @@ export function getCountriesQueryOptions() {
 		queryKey: ["countries"],
 		queryFn: ({ signal }) =>
 			COUNTRIES_API.query({
-				fields: ["name", "cca2"],
+				fields: ["name", "cca2", "region", "subregion"],
 			})
 				.options({ signal })
 				.get("/all") as Promise<CountryBase[]>,
@@ -32,15 +32,23 @@ export function useCountries() {
  * Get country query options
  */
 export function getCountryQueryOptions(countryCCA2: string) {
-	return queryOptions<CountryFull[], Error, CountryFull | undefined>({
+	return queryOptions<CountryFull>({
 		queryKey: ["countries", countryCCA2],
 		queryFn: ({ signal }) =>
 			COUNTRIES_API.query({
-				fields: ["name", "capital", "currencies", "languages", "cca2"],
+				fields: [
+					"name",
+					"capital",
+					"currencies",
+					"languages",
+					"cca2",
+					"region",
+					"subregion",
+					"maps",
+				],
 			})
 				.options({ signal })
-				.get(`/name/${countryCCA2}`) as Promise<CountryFull[]>,
-		select: (data) => data.at(0),
+				.get(`/alpha/${countryCCA2}`) as Promise<CountryFull>,
 	});
 }
 

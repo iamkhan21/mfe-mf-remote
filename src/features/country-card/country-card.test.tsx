@@ -1,9 +1,9 @@
 import React from "react";
 import { useCountry } from "../../entities/country/model";
-import { describe, expect, it, type Mock, vi } from "vitest";
+import { describe, expect, beforeEach, it, type Mock, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import CountryCard from "./country-card";
-import type { CountryFull } from "../../entities/country/domain"; // Mock of useCountry query
+import { type CountryFull, MAP_TYPE } from "../../entities/country/domain"; // Mock of useCountry query
 
 // Mock of useCountry query
 vi.mock("../../entities/country/model", () => ({
@@ -35,6 +35,12 @@ const MOCKED_COUNTRY_DATA: CountryFull = {
 	},
 	capital: ["Capital name"],
 	languages: { l: "Language name" },
+	region: "Region name",
+	subregion: "Subregion name",
+	maps: {
+		googleMaps: "https://google.com",
+		openStreetMaps: "https://openstreetmap.com",
+	},
 };
 
 describe("<CountryCard />", () => {
@@ -63,6 +69,11 @@ describe("<CountryCard />", () => {
 		expect(screen.getByTestId("languages-skeleton")).toBeInTheDocument();
 		expect(screen.getByText(/currencies/i)).toBeInTheDocument();
 		expect(screen.getByTestId("currencies-skeleton")).toBeInTheDocument();
+
+		expect(screen.getByText(/maps/i)).toBeInTheDocument();
+		expect(screen.getByTestId("maps-skeleton")).toBeInTheDocument();
+		expect(screen.getByText(/region/i)).toBeInTheDocument();
+		expect(screen.getByTestId("region-skeleton")).toBeInTheDocument();
 	});
 
 	it("should render without error", () => {
@@ -98,6 +109,25 @@ describe("<CountryCard />", () => {
 		)) {
 			expect(screen.getByText(new RegExp(name, "i"))).toBeInTheDocument();
 			expect(screen.getByText(new RegExp(symbol, "i"))).toBeInTheDocument();
+		}
+
+		expect(
+			screen.getByText(new RegExp(MOCKED_COUNTRY_DATA.region, "i")),
+		).toBeInTheDocument();
+		expect(
+			screen.getByText(new RegExp(MOCKED_COUNTRY_DATA.subregion, "i")),
+		).toBeInTheDocument();
+
+		for (const [key, value] of Object.entries(MOCKED_COUNTRY_DATA.maps)) {
+			const link = screen.getByText(
+				new RegExp(
+					// @ts-ignore
+					MAP_TYPE[key],
+					"i",
+				),
+			);
+			expect(link).toBeInTheDocument();
+			expect(link).toHaveAttribute("href", value);
 		}
 	});
 
