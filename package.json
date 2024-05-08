@@ -7,7 +7,6 @@
     "build": "rsbuild build",
     "preview": "rsbuild preview",
     "doctor": "cross-env RSDOCTOR=true nr build",
-    "update:deps": "nlx taze -wlI",
     "format": "nlx @biomejs/biome format --write ./src",
     "lint:fix": "nlx @biomejs/biome lint --apply-unsafe ./src",
     "lint": "nlx @biomejs/biome lint ./src",
@@ -16,7 +15,8 @@
     "test:coverage": "vitest run --coverage",
     "ladle:start": "nlx ladle serve -p 5174",
     "ladle:build": "nlx ladle build",
-    "ladle:preview": "nlx ladle preview -p 5174"
+    "ladle:preview": "nlx ladle preview -p 5174",
+    "update:deps": "nlx taze -wlI"
   },
   "dependencies": {
     "@radix-ui/themes": "3.0.3",
@@ -33,9 +33,9 @@
     "@biomejs/biome": "1.7.3",
     "@ladle/react": "4.0.3",
     "@module-federation/enhanced": "0.1.12",
-    "@rsbuild/core": "0.6.11",
-    "@rsbuild/plugin-css-minimizer": "0.6.11",
-    "@rsbuild/plugin-react": "0.6.11",
+    "@rsbuild/core": "0.6.13",
+    "@rsbuild/plugin-css-minimizer": "0.6.13",
+    "@rsbuild/plugin-react": "0.6.13",
     "@rsdoctor/rspack-plugin": "0.2.2",
     "@tanstack/react-query-devtools": "5.35.1",
     "@testing-library/jest-dom": "6.4.5",

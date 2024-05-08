@@ -1,7 +1,7 @@
 import React from "react";
 import { useCountry } from "../../entities/country/model";
 import { describe, expect, beforeEach, it, type Mock, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../test/test-utils";
 import CountryCard from "./country-card";
 import { type CountryFull, MAP_TYPE } from "../../entities/country/domain"; // Mock of useCountry query
 
@@ -61,19 +61,80 @@ describe("<CountryCard />", () => {
 		setup();
 
 		expect(screen.getByTestId("common-name-skeleton")).toBeInTheDocument();
+
 		expect(screen.getByText(/official/i)).toBeInTheDocument();
 		expect(screen.getByTestId("official-skeleton")).toBeInTheDocument();
+
 		expect(screen.getByText(/capital/i)).toBeInTheDocument();
 		expect(screen.getByTestId("capital-skeleton")).toBeInTheDocument();
+
 		expect(screen.getByText(/languages/i)).toBeInTheDocument();
 		expect(screen.getByTestId("languages-skeleton")).toBeInTheDocument();
+
 		expect(screen.getByText(/currencies/i)).toBeInTheDocument();
 		expect(screen.getByTestId("currencies-skeleton")).toBeInTheDocument();
 
 		expect(screen.getByText(/maps/i)).toBeInTheDocument();
 		expect(screen.getByTestId("maps-skeleton")).toBeInTheDocument();
+
 		expect(screen.getByText(/region/i)).toBeInTheDocument();
 		expect(screen.getByTestId("region-skeleton")).toBeInTheDocument();
+	});
+
+	it("should show partial skeletons in case of placeholder data", () => {
+		mockedUseCountry.mockReturnValue({
+			data: MOCKED_COUNTRY_DATA,
+			isLoading: false,
+			error: undefined,
+			isError: false,
+			isPlaceholderData: true,
+		});
+
+		setup();
+
+		expect(
+			screen.queryByTestId("common-name-skeleton"),
+		).not.toBeInTheDocument();
+
+		expect(screen.queryByTestId("official-skeleton")).not.toBeInTheDocument();
+
+		expect(screen.queryByTestId("region-skeleton")).not.toBeInTheDocument();
+
+		expect(screen.getByTestId("capital-skeleton")).toBeInTheDocument();
+
+		expect(screen.getByTestId("languages-skeleton")).toBeInTheDocument();
+
+		expect(screen.getByTestId("currencies-skeleton")).toBeInTheDocument();
+
+		expect(screen.getByTestId("maps-skeleton")).toBeInTheDocument();
+	});
+
+	it("should show error message in case of error", () => {
+		const errorMessage = "Test Error message";
+
+		mockedUseCountry.mockReturnValue({
+			data: undefined,
+			isLoading: false,
+			error: new Error(errorMessage),
+			isError: true,
+		});
+
+		setup();
+
+		expect(screen.getByText(errorMessage)).toBeInTheDocument();
+	});
+
+	it('should show "Data not found" message in case of no data', () => {
+		mockedUseCountry.mockReturnValue({
+			data: undefined,
+			isLoading: false,
+			error: undefined,
+			isError: false,
+		});
+
+		setup();
+
+		expect(screen.getByText(/data not found/i)).toBeInTheDocument();
 	});
 
 	it("should render without error", () => {
@@ -129,33 +190,5 @@ describe("<CountryCard />", () => {
 			expect(link).toBeInTheDocument();
 			expect(link).toHaveAttribute("href", value);
 		}
-	});
-
-	it("should show error message in case of error", () => {
-		const errorMessage = "Test Error message";
-
-		mockedUseCountry.mockReturnValue({
-			data: undefined,
-			isLoading: false,
-			error: new Error(errorMessage),
-			isError: true,
-		});
-
-		setup();
-
-		expect(screen.getByText(errorMessage)).toBeInTheDocument();
-	});
-
-	it('should show "Data not found" message in case of no data', () => {
-		mockedUseCountry.mockReturnValue({
-			data: undefined,
-			isLoading: false,
-			error: undefined,
-			isError: false,
-		});
-
-		setup();
-
-		expect(screen.getByText(/data not found/i)).toBeInTheDocument();
 	});
 });

@@ -1,4 +1,8 @@
-import { queryOptions, useQuery } from "@tanstack/react-query";
+import {
+	type QueryClient,
+	queryOptions,
+	useQuery,
+} from "@tanstack/react-query";
 import { COUNTRIES_API } from "../../shared/utils/api";
 import type { CountryBase, CountryFull } from "./domain";
 
@@ -31,8 +35,11 @@ export function useCountries() {
 /**
  * Get country query options
  */
-export function getCountryQueryOptions(countryCCA2: string) {
-	return queryOptions<CountryFull>({
+export function getCountryQueryOptions(
+	countryCCA2: string,
+	queryClient: QueryClient,
+) {
+	return queryOptions<CountryBase, Error, CountryFull>({
 		queryKey: ["countries", countryCCA2],
 		queryFn: ({ signal }) =>
 			COUNTRIES_API.query({
@@ -49,12 +56,16 @@ export function getCountryQueryOptions(countryCCA2: string) {
 			})
 				.options({ signal })
 				.get(`/alpha/${countryCCA2}`) as Promise<CountryFull>,
+		placeholderData: () =>
+			queryClient
+				.getQueryData(getCountriesQueryOptions().queryKey)
+				?.find((country) => country.cca2 === countryCCA2),
 	});
 }
 
 /**
  * Get country by cca2 query
  */
-export function useCountry(countryCCA2: string) {
-	return useQuery(getCountryQueryOptions(countryCCA2));
+export function useCountry(countryCCA2: string, queryClient: QueryClient) {
+	return useQuery(getCountryQueryOptions(countryCCA2, queryClient));
 }

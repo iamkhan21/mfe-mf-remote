@@ -1,6 +1,7 @@
 import type React from "react";
 import { cleanup, render } from "@testing-library/react";
 import { afterEach } from "vitest";
+import { withProviders } from "../app/providers";
 
 afterEach(() => {
 	cleanup();
@@ -9,7 +10,10 @@ afterEach(() => {
 function customRender(ui: React.ReactElement, options = {}) {
 	return render(ui, {
 		// wrap provider(s) here if needed
-		wrapper: ({ children }) => children,
+		wrapper: ({ children }) => {
+			const Component = withProviders(() => children);
+			return <Component />;
+		},
 		...options,
 	});
 }
