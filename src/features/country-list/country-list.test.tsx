@@ -2,7 +2,7 @@ import { useCountries } from "../../entities/country/model";
 import CountryList from "./country-list";
 import { render, screen, userEvent } from "../../test/test-utils";
 import { beforeEach, describe, it, type Mock, vi } from "vitest";
-import type { CountryBase } from "../../entities/country/domain";
+import MOCKED_COUNTRIES from "./countries.mock.json";
 
 vi.mock("../../entities/country/model", () => ({
 	useCountries: vi.fn(),
@@ -12,54 +12,6 @@ const mockedUseCountries = useCountries as Mock<
 	[],
 	Partial<ReturnType<typeof useCountries>>
 >;
-
-const MOCKED_COUNTRIES: Array<CountryBase> = [
-	{
-		name: {
-			common: "Common name 1",
-			official: "Official name 1",
-			nativeName: {
-				lng: {
-					official: "Official native name 1",
-					common: "Common native name 1",
-				},
-			},
-		},
-		cca2: "CCA21",
-		region: "Region name 1",
-		subregion: "Subregion name 1",
-	},
-	{
-		name: {
-			common: "Common name 2",
-			official: "Official name 2",
-			nativeName: {
-				lng: {
-					official: "Official native name 2",
-					common: "Common native name 2",
-				},
-			},
-		},
-		cca2: "CCA22",
-		region: "Region name 2",
-		subregion: "Subregion name 2",
-	},
-	{
-		name: {
-			common: "Common name 3",
-			official: "Official name 3",
-			nativeName: {
-				lng: {
-					official: "Official native name 3",
-					common: "Common native name 3",
-				},
-			},
-		},
-		cca2: "CCA23",
-		region: "Region name 3",
-		subregion: "Subregion name 3",
-	},
-];
 
 describe("<CountryList />", () => {
 	function setup(handleCountryClick = vi.fn()) {

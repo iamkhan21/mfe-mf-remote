@@ -3,8 +3,8 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { pluginCssMinimizer } from "@rsbuild/plugin-css-minimizer";
 import { RsdoctorRspackPlugin } from "@rsdoctor/rspack-plugin";
 import { BundlerPluginInstance } from "@rsbuild/shared";
-// import { dependencies } from "./package.json";
-// import { ModuleFederationPlugin } from "@module-federation/enhanced/rspack";
+import { dependencies } from "./package.json";
+import { ModuleFederationPlugin } from "@module-federation/enhanced/rspack";
 
 export default defineConfig((env) => {
   const isProduction = env.envMode === "production";
@@ -47,22 +47,24 @@ export default defineConfig((env) => {
         config.output!.uniqueName = moduleName;
 
         appendPlugins([
-          // new ModuleFederationPlugin({
-          //   name: moduleName,
-          //   exposes: {
-          //     "./UserCard": "./src/features/UserCard",
-          //   },
-          //   shared: {
-          //     react: {
-          //       singleton: true,
-          //       requiredVersion: dependencies["react"],
-          //     },
-          //     "react-dom": {
-          //       singleton: true,
-          //       requiredVersion: dependencies["react-dom"],
-          //     },
-          //   },
-          // }),
+          new ModuleFederationPlugin({
+            name: moduleName,
+            exposes: {
+              "./UserCard": "./src/features/user-card",
+              "./CountryCard": "./src/features/country-card",
+              "./CountryList": "./src/features/country-list",
+            },
+            shared: {
+              react: {
+                singleton: true,
+                requiredVersion: dependencies["react"],
+              },
+              "react-dom": {
+                singleton: true,
+                requiredVersion: dependencies["react-dom"],
+              },
+            },
+          }),
           ...rspackPlugins,
         ]);
       },

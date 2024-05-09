@@ -1,9 +1,10 @@
 import React from "react";
 import { useCountry } from "../../entities/country/model";
-import { describe, expect, beforeEach, it, type Mock, vi } from "vitest";
+import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 import { render, screen } from "../../test/test-utils";
 import CountryCard from "./country-card";
-import { type CountryFull, MAP_TYPE } from "../../entities/country/domain"; // Mock of useCountry query
+import { MAP_TYPE } from "../../entities/country/domain";
+import MOCKED_COUNTRY_DATA from "./country.mock.json";
 
 // Mock of useCountry query
 vi.mock("../../entities/country/model", () => ({
@@ -14,34 +15,6 @@ const mockedUseCountry = useCountry as Mock<
 	[string],
 	Partial<ReturnType<typeof useCountry>>
 >;
-
-const MOCKED_COUNTRY_DATA: CountryFull = {
-	name: {
-		common: "Common name",
-		official: "Official name",
-		nativeName: {
-			lng: {
-				official: "Official native name",
-				common: "Common native name",
-			},
-		},
-	},
-	cca2: "CCA2",
-	currencies: {
-		smb: {
-			name: "Currency name",
-			symbol: "Currency symbol",
-		},
-	},
-	capital: ["Capital name"],
-	languages: { l: "Language name" },
-	region: "Region name",
-	subregion: "Subregion name",
-	maps: {
-		googleMaps: "https://google.com",
-		openStreetMaps: "https://openstreetmap.com",
-	},
-};
 
 describe("<CountryCard />", () => {
 	function setup(countryIsoCode = "BY") {

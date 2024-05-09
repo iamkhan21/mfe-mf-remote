@@ -1,0 +1,29 @@
+{
+	"name": {
+		"common": "`Common name`",
+		"official": "`Official name`",
+		"nativeName": {
+			"lng": {
+				"official": "`Official native name`",
+				"common": "`Common native name`"
+			}
+		}
+	},
+	"cca2": "CCA21",
+	"region": "`region`",
+	"subregion": "`subregion`",
+	"capital": ["`capital`"],
+	"currencies": {
+		"smb": {
+			"name": "`currency`",
+			"symbol": "Currency symbol"
+		}
+	},
+	"languages": {
+		"l": "`language`"
+	},
+	"maps": {
+		"googleMaps": "google-maps-link",
+		"openStreetMaps": "open-street-maps-link"
+	}
+}
