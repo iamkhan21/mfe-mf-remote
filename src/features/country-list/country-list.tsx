@@ -45,7 +45,7 @@ const CountryList: React.FC<CountryListProps> = (props) => {
 								<Table.Cell>{country.name.common}</Table.Cell>
 								<Table.Cell>{country.cca2}</Table.Cell>
 								<Table.Cell>
-									{country.region} {country.subregion}
+									{country.subregion}, {country.region}
 								</Table.Cell>
 							</Table.Row>
 						))
