@@ -11,6 +11,5 @@ coverage/
 
 # IDE
 .vscode/*
-!.vscode/extensions.json
 .idea
-bun.lockb
+

@@ -63,6 +63,10 @@ export default defineConfig((env) => {
                 singleton: true,
                 requiredVersion: dependencies["react-dom"],
               },
+              "@tanstack/react-query": {
+                singleton: true,
+                requiredVersion: dependencies["@tanstack/react-query"],
+              },
             },
           }),
           ...rspackPlugins,
