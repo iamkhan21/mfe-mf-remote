@@ -1,4 +1,3 @@
-import React from "react";
 import { useCountry } from "../../entities/country/model";
 import { beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 import { render, screen } from "../../test/test-utils";

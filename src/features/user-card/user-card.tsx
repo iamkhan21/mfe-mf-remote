@@ -1,11 +1,11 @@
-import React from "react";
+import { type ChangeEvent, type Reducer, useReducer } from "react";
 import { Card, Grid, Separator, Text, TextField } from "@radix-ui/themes";
 
 export type User = {
-	name: string;
-	email: string;
-	phone: string;
-	avatar: string;
+  name: string;
+  email: string;
+  phone: string;
+  avatar: string;
 };
 
 type UserCardProps = {
@@ -24,8 +24,8 @@ function UserCard({
 	},
 	onSubmit = () => {},
 }: UserCardProps) {
-	const [state, dispatch] = React.useReducer<
-		React.Reducer<
+	const [state, dispatch] = useReducer<
+		Reducer<
 			User,
 			{
 				type: keyof User;
@@ -40,8 +40,11 @@ function UserCard({
 		user,
 	);
 
-	function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-		dispatch({ type: e.target.name as keyof User, payload: e.target.value });
+	function handleInput(e: ChangeEvent<HTMLInputElement>) {
+		dispatch({
+			type: e.target.name as keyof User,
+			payload: e.target.value,
+		});
 	}
 
 	return (
